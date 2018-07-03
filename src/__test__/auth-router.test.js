@@ -18,7 +18,7 @@ describe('AUTH router', () => {
       email: faker.internet.email(),
       password: 'password',
     };
-    
+
     return superagent.post(`${apiUrl}/signup`)
       .send(mockAccount)
       .then((response) => {
@@ -31,25 +31,41 @@ describe('AUTH router', () => {
   });
 
   test('POST 400 to /api/signup for bad request', () => {
-    // const badMockAccount = {
-    //   username: faker.internet.userName(),
-    //   password: 'password',
-    // }
+    const badMockAccount = {
+      username: faker.internet.userName(),
+      password: 'password',
+    };
+
+    return superagent.post(`${apiUrl}/signup`)
+      .send(badMockAccount)
+      .then((response) => {
+        throw response;
+      })
+      .catch((err) => {
+        expect(err.status).toBe(400);
+      });
+  });
+
+  // test.only('POST 409 to /api/signup for duplicate value', () => {
+  //   const mockAccount = {
+  //     username: 'duplicate',
+  //     email: 'duplicate@gmail.com',
+  //     password: 'password',
+  //   };
     
-    // return superagent.post(`${apiUrl}/signup`)
-    //   .send(badMockAccount)
-    //   .then((response) => {
-    //     throw response;
-    //   })
-    //   .catch((err) => {
-    //     expect(err.status).toBe(400);
-    //   });
-  });
-
-  test('POST 409 to /api/signup for duplicate value', () => {
-
-  });
-
+  //   Promise.all([
+  //     superagent.post(`${apiUrl}/signup`).send(mockAccount),
+  //     superagent.post(`${apiUrl}/signup`).send(mockAccount),
+  //   ])
+  //     .then((response) => {
+  //       // console.log(JSON.stringify(response, null, 2), 'THIS IS THE RESPONSE');
+  //       throw response;
+  //     })
+  //     .catch((err) => {
+  //       // console.log(JSON.stringify(err, null, 2), 'THIS IS THE ERROR');
+  //       expect(err.status).toBe(409);
+  //     });
+  // });
 
   test('GET 200 to api/login for successful login and receipt of a TOKEN', () => {
     return createAccountMockPromise()

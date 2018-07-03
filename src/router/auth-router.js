@@ -7,6 +7,10 @@ import logger from '../lib/logger';
 const authRouter = new Router();
 
 authRouter.post('/api/signup', (request, response, next) => {
+  if (!request.body.email || !request.body.username || !request.body.password) {
+    return next(new HttpErrors(400, 'AUTH-ROUTER: invalid request'));
+  }
+  
   return Account.create(request.body.username, request.body.email, request.body.password)
     .then((account) => {
       delete request.body.password;
