@@ -1,22 +1,29 @@
 ## Submission Instructions
-* **Deploy to Heroku**
-* Open a pull request to this repository
-* Submit on canvas 
-  * a question: 
-  * and observation: 
-  * your original estimate: 5 hours
-  * how long you spent: 
-  * a link to your pull request (**You will get a 0 if you have a failing PR or haven't hooked up Travis CI**)
-  * a link to your deployed Heroku URL: https://ashton-lab16-19.herokuapp.com/
+* Submit on canvas:
+  * your original time estimate: 5 hours
+  * how long you spent: 5 hours
+  * link to your pull request: https://github.com/ashtonkellis/16-19-auth-asset-mgt/pull/5
+  * link to your deployed Heroku URL: https://ashton-lab16-19.herokuapp.com/
 
-#### Server Endpoints
-* `POST /signup` 
-  * pass data as stringifed JSON in the body of a **POST** request to create a new account
+### Server Endpoints
+* `POST /<resource-name>` 
+  * pass a bearer authentication middleware in the request to authorize the creation of the resource
+  * pass data as stringifed JSON in the body of a **POST** request to create a new resource
   * on success respond with a 200 status code and an authentication token
   * on failure due to a bad request send a 400 status code
+  * **OR** on failure due to bad token or lack of token respond with a 401 status code
+* `GET /<resource-name>/:id` 
+  * pass a bearer authentication middleware in the request to authorize the creation of the resource
+  * on success respond with a 200 status code and a resource
+  * on failure due to a bad id send a 404 status code
+  * on failure due to bad token or lack of token respond with a 401 status code
 
 ## Tests
-* POST should test for 200, 400, and 409 (if any keys are unique)
+* Write your additional tests utilizing the new [ES7 async/await syntax](https://javascript.info/async-await)
+* Write 200, 400, and 401 **OR** 404 tests for `/login` (Auth router)
+* Write 200, 400, and 401 **OR** 404 tests for `POST /<resource-name>`
+* Write 200 and 401 **OR** 404 tests for `GET /<resource-name>/:id`
+* **This will involve changing the 400 error codes I already gave you to a 401 or 404. Think about the most appropriate place in the code that should be changed to a more appropriate error code instead, and change it there.**
 
 ## Documentation
-Add your Travis badge to the top of your README. List all of your registered routes and describe their behavior. Describe what your resouce is. Imagine you are providing this API to other developers who need to research your API in order to use it. Describe how a developer should be able to make requests to your API. Refer to the PokeAPI docs for a good example to follow.
+Same as previous lab, with addition of new routes for this lab. 

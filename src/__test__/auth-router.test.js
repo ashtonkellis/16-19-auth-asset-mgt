@@ -50,7 +50,7 @@ describe('AUTH router', () => {
   //   const mockAccount = {
   //     username: 'duplicate',
   //     email: 'duplicate@gmail.com',
-  //     password: 'password',
+  //     password: 'passwordFor409',
   //   };
     
   //   Promise.all([
@@ -58,11 +58,11 @@ describe('AUTH router', () => {
   //     superagent.post(`${apiUrl}/signup`).send(mockAccount),
   //   ])
   //     .then((response) => {
-  //       // console.log(JSON.stringify(response, null, 2), 'THIS IS THE RESPONSE');
+  //       console.log(JSON.stringify(response, null, 2), 'THIS IS THE RESPONSE'); // eslint-disable-line
   //       throw response;
   //     })
   //     .catch((err) => {
-  //       // console.log(JSON.stringify(err, null, 2), 'THIS IS THE ERROR');
+  //       console.log(JSON.stringify(err, null, 2), 'THIS IS THE ERROR'); // eslint-disable-line
   //       expect(err.status).toBe(409);
   //     });
   // });
