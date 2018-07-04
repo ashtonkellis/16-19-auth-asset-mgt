@@ -1,20 +1,11 @@
 ## Submission Instructions
-* Continue from Lab 16 in a new branch called `lab-17`
 * Submit on canvas:
   * your original time estimate: 5 hours
-  * how long you spent: 
+  * how long you spent: 5 hours
   * link to your pull request: 
   * link to your deployed Heroku URL: 
 
-### Bearer Auth middleware 
-Create middleware for parsing a Bearer Authorization header, it should add an Account to the request object.
-
-### Access controlled resource 
-Create a model with at least four properties that belongs to an account. The model should require an account id associated to an account. It is OK if you want to use a `Profile` model as demonstrated in lecture.
-
 ### Server Endpoints
-* `GET /login` (Auth Route)
-  * Create a login route that uses the basic authentication middleware to log in a user.
 * `POST /<resource-name>` 
   * pass a bearer authentication middleware in the request to authorize the creation of the resource
   * pass data as stringifed JSON in the body of a **POST** request to create a new resource
