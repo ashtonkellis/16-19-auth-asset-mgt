@@ -1,5 +1,4 @@
 import faker from 'faker';
-import HttpError from 'http-errors';
 import Account from '../../model/account';
 
 const createAccountMockPromise = () => {
@@ -14,7 +13,7 @@ const createAccountMockPromise = () => {
     .then((account) => {
       mockData.originalRequest = originalRequest;
       mockData.account = account;
-      return account.createTokenPromise();
+      return account.createTokenPromise(); // this line changes the token seed
     })
     .then((token) => {
       mockData.token = token;
@@ -23,9 +22,6 @@ const createAccountMockPromise = () => {
     .then((account) => {
       mockData.account = account;
       return mockData;
-    })
-    .catch((err) => {
-      throw new HttpError(500, `ACCOUNT MOCK: Error creating mock account. ${JSON.stringify(err)}`);
     });
 };
 
