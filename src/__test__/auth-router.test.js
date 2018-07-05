@@ -10,7 +10,7 @@ const apiUrl = `http://localhost:${process.env.PORT}/api`;
 describe('AUTH router', () => {
   beforeAll(startServer);
   afterAll(stopServer);
-  afterEach(removeAccountMockPromise);
+  beforeEach(removeAccountMockPromise);
 
   test('POST 200 to /api/signup for successful account creation and receipt of a TOKEN', () => {
     const mockAccount = {

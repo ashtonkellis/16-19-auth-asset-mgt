@@ -10,8 +10,11 @@ authRouter.post('/api/signup', (request, response, next) => {
   if (!request.body.email || !request.body.username || !request.body.password) {
     return next(new HttpErrors(400, 'AUTH-ROUTER: invalid request'));
   }
-  
-  return Account.create(request.body.username, request.body.email, request.body.password)
+
+  Account.init()
+    .then(() => {
+      return Account.create(request.body.username, request.body.email, request.body.password);
+    })
     .then((account) => {
       delete request.body.password;
       logger.log(logger.INFO, 'AUTH-ROUTER /api/signup: creating token');
@@ -22,16 +25,22 @@ authRouter.post('/api/signup', (request, response, next) => {
       return response.json({ token });
     })
     .catch(next);
+  return undefined;
 });
 
 authRouter.get('/api/login', basicAuthMiddleware, (request, response, next) => {
   if (!request.account) return next(new HttpErrors(400, 'AUTH-ROUTER: invalid request'));
-  return request.account.createTokenPromise()
+  
+  Account.init()
+    .then(() => {
+      return request.account.createTokenPromise();
+    })
     .then((token) => {
       logger.log(logger.INFO, `AUTH-ROUTER /api/login - responding with a 200 status code and a token ${token}`);
       return response.json({ token });
     })
     .catch(next);
+  return undefined;
 });
 
 export default authRouter;
