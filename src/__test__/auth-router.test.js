@@ -4,7 +4,6 @@ import faker from 'faker';
 import { startServer, stopServer } from '../lib/server';
 import { createAccountMockPromise, removeAccountMockPromise } from './lib/account-mock';
 
-
 const apiUrl = `http://localhost:${process.env.PORT}/api`;
 
 describe('AUTH router', () => {
@@ -13,6 +12,32 @@ describe('AUTH router', () => {
   beforeEach((done) => {
     removeAccountMockPromise();
     done();
+  });
+
+  test('GET 200 to api/login for successful login and receipt of a TOKEN', () => {
+    return createAccountMockPromise()
+      .then((mockData) => {
+        return superagent.get(`${apiUrl}/login`)
+          .auth(mockData.account.username, mockData.originalRequest.password);
+      })
+      .then((response) => {
+        expect(response.status).toEqual(200);
+        expect(response.body.token).toBeTruthy();
+      })
+      .catch((err) => {
+        throw err;
+      });
+  });
+
+  test('GET 400 to /api/login for unsuccesful login with bad username and password', () => {
+    return superagent.get(`${apiUrl}/login`)
+      .auth('bad username', 'bad password')
+      .then((response) => {
+        throw response;
+      })
+      .catch((err) => {
+        expect(err.status).toEqual(400);
+      });
   });
 
   test('POST 200 to /api/signup for successful account creation and receipt of a TOKEN', () => {
@@ -67,32 +92,6 @@ describe('AUTH router', () => {
       .catch((err) => {
         console.log(JSON.stringify(err, null, 2), 'THIS IS THE ERROR'); // eslint-disable-line
         expect(err.status).toBe(409);
-      });
-  });
-
-  test('GET 200 to api/login for successful login and receipt of a TOKEN', () => {
-    return createAccountMockPromise()
-      .then((mockData) => {
-        return superagent.get(`${apiUrl}/login`)
-          .auth(mockData.account.username, mockData.originalRequest.password);
-      })
-      .then((response) => {
-        expect(response.status).toEqual(200);
-        expect(response.body.token).toBeTruthy();
-      })
-      .catch((err) => {
-        throw err;
-      });
-  });
-
-  test('GET 400 to /api/login for unsuccesful login with bad username and password', () => {
-    return superagent.get(`${apiUrl}/login`)
-      .auth('bad username', 'bad password')
-      .then((response) => {
-        throw response;
-      })
-      .catch((err) => {
-        expect(err.status).toEqual(400);
       });
   });
 });
