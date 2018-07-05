@@ -96,3 +96,5 @@ describe('AUTH router', () => {
       });
   });
 });
+
+// tests fail if done in post get order, but pass if done in get post order
