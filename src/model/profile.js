@@ -12,5 +12,5 @@ const profileSchema = mongoose.Schema({
   },
 });
 
-const skipInit = process.env.NODE_END === 'development';
+const skipInit = process.env.NODE_ENV === 'development';
 export default mongoose.model('profiles', profileSchema, 'profiles', skipInit);

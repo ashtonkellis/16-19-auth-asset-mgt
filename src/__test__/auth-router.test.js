@@ -10,7 +10,10 @@ const apiUrl = `http://localhost:${process.env.PORT}/api`;
 describe('AUTH router', () => {
   beforeAll(startServer);
   afterAll(stopServer);
-  beforeEach(removeAccountMockPromise);
+  beforeEach((done) => {
+    removeAccountMockPromise();
+    done();
+  });
 
   test('POST 200 to /api/signup for successful account creation and receipt of a TOKEN', () => {
     const mockAccount = {
@@ -46,26 +49,26 @@ describe('AUTH router', () => {
       });
   });
 
-  // test.only('POST 409 to /api/signup for duplicate value', () => {
-  //   const mockAccount = {
-  //     username: 'duplicate',
-  //     email: 'duplicate@gmail.com',
-  //     password: 'passwordFor409',
-  //   };
+  test('POST 409 to /api/signup for duplicate value', () => { //eslint-disable-line
+    const mockAccount = {
+      username: 'duplicate',
+      email: 'duplicate@gmail.com',
+      password: 'passwordFor409',
+    };
     
-  //   Promise.all([
-  //     superagent.post(`${apiUrl}/signup`).send(mockAccount),
-  //     superagent.post(`${apiUrl}/signup`).send(mockAccount),
-  //   ])
-  //     .then((response) => {
-  //       console.log(JSON.stringify(response, null, 2), 'THIS IS THE RESPONSE'); // eslint-disable-line
-  //       throw response;
-  //     })
-  //     .catch((err) => {
-  //       console.log(JSON.stringify(err, null, 2), 'THIS IS THE ERROR'); // eslint-disable-line
-  //       expect(err.status).toBe(409);
-  //     });
-  // });
+    Promise.all([
+      superagent.post(`${apiUrl}/signup`).send(mockAccount),
+      superagent.post(`${apiUrl}/signup`).send(mockAccount),
+    ])
+      .then((response) => {
+        console.log(JSON.stringify(response, null, 2), 'THIS IS THE RESPONSE'); // eslint-disable-line
+        throw response;
+      })
+      .catch((err) => {
+        console.log(JSON.stringify(err, null, 2), 'THIS IS THE ERROR'); // eslint-disable-line
+        expect(err.status).toBe(409);
+      });
+  });
 
   test('GET 200 to api/login for successful login and receipt of a TOKEN', () => {
     return createAccountMockPromise()

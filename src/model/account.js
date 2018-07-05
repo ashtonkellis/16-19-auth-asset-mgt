@@ -51,6 +51,8 @@ accountSchema.methods.createTokenPromise = function createTokenPromise() {
 };
 
 const skipInit = process.env.NODE_ENV === 'development';
+console.log(skipInit, 'SKIP INIT');
+
 const Account = mongoose.model('accounts', accountSchema, 'accounts', skipInit);
 
 Account.create = (username, email, password) => {
