@@ -2,13 +2,17 @@
 
 // import { Mongoose } from 'mongoose';
 import { Router } from 'express';
-// import createError from 'http-errors';
+import HttpErrors from 'http-errors';
 import logger from '../lib/logger';
 import Movie from '../model/movie';
+import bearerAuthMiddleware from '../lib/middleware/bearer-auth-middleware';
 
 const movieRouter = new Router();
 
-movieRouter.post('/api/movies', (request, response, next) => {
+movieRouter.post('/api/movies', bearerAuthMiddleware, (request, response, next) => {
+  
+  if (!request.account) return next(new HttpErrors(401, 'MOVIE ROUTER POST ERROR: not authorized'));
+
   Movie.init()
     .then(() => {
       logger.log(logger.INFO, `MOVIE ROUTER BEFORE SAVE: Saved a new movie ${JSON.stringify(request.body)}`);
@@ -19,6 +23,8 @@ movieRouter.post('/api/movies', (request, response, next) => {
       return response.json(newMovie);
     })
     .catch(next);
+  
+  return undefined;
 });
 
 movieRouter.get('/api/movies/:id?', (request, response, next) => {
