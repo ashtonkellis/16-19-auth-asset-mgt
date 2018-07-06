@@ -1,6 +1,5 @@
 'use strict';
 
-// import { Mongoose } from 'mongoose';
 import { Router } from 'express';
 import HttpErrors from 'http-errors';
 import logger from '../lib/logger';
@@ -10,7 +9,6 @@ import bearerAuthMiddleware from '../lib/middleware/bearer-auth-middleware';
 const movieRouter = new Router();
 
 movieRouter.post('/api/movies', bearerAuthMiddleware, (request, response, next) => {
-  // console.log('MOVIE ROUTER');
   if (!request.account) return next(new HttpErrors(401, 'MOVIE ROUTER POST ERROR: not authorized'));
 
   Movie.init()
