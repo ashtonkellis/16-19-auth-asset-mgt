@@ -28,7 +28,7 @@ authRouter.post('/api/signup', (request, response, next) => {
   return undefined;
 });
 
-authRouter.get('/api/login', (request, response, next) => {
+authRouter.get('/api/login', basicAuthMiddleware, (request, response, next) => {
   if (!request.account) return next(new HttpErrors(400, 'AUTH-ROUTER: invalid request'));
   
   Account.init()

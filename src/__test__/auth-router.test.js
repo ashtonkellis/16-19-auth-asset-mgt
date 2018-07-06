@@ -14,7 +14,7 @@ describe('AUTH router', () => {
     done();
   });
 
-  test.only('GET 200 to api/login for successful login and receipt of a TOKEN', () => {
+  test('GET 200 to api/login for successful login and receipt of a TOKEN', () => {
     return createAccountMockPromise()
       .then((mockData) => {
         return superagent.get(`${apiUrl}/login`)
@@ -25,6 +25,7 @@ describe('AUTH router', () => {
         expect(response.body.token).toBeTruthy();
       })
       .catch((err) => {
+        console.log(JSON.stringify(err, null, 2), 'GET 200 ERROR');
         throw err;
       });
   });
