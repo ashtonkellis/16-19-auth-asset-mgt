@@ -15,21 +15,23 @@ import Account from '../../model/account';
 // };
 
 const createMovieMockPromise = async () => {
-  const mockData = {};
-
   const mockAcctResponse = await createAccountMockPromise();
-  mockData.account = mockAcctResponse.account;
-  mockData.token = mockAcctResponse.token;
+
+  // console.log(JSON.stringify(mockAcctResponse, null, 2), 'MOCK ACCOUNT RESPONSE');
 
   const movie = await new Movie({
     name: faker.lorem.words(2),
     director: faker.lorem.words(2),
-    accountId: mockData.account._id,
+    accountId: mockAcctResponse.account._id,
   }).save();
 
+  const mockData = {};
   mockData.movie = movie;
+  mockData.account = mockAcctResponse.account;
+  mockData.token = mockAcctResponse.token;
 
-  return mockData;
+  // console.log(JSON.stringify(mockData, null, 2), 'MOCK DATA');
+  return Promise.resolve(mockData);
 };
 
 const removeMoviesAndAccounts = () => {

@@ -12,6 +12,10 @@ const movieSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  accountId: {
+    type: mongoose.Schema.Types.ObjectId,
+    require: true,
+  },
 }, { timestamps: true });
 
 const skipInit = process.env.NODE_ENV === 'development';
