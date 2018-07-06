@@ -25,7 +25,6 @@ describe('AUTH router', () => {
         expect(response.body.token).toBeTruthy();
       })
       .catch((err) => {
-        console.log(JSON.stringify(err, null, 2), 'GET 200 ERROR');
         throw err;
       });
   });
@@ -75,29 +74,21 @@ describe('AUTH router', () => {
       });
   });
 
-  test('POST 409 to /api/signup for duplicate value', () => { //eslint-disable-line
-
+  test('POST 409 to /api/signup for duplicate value', () => {
     return createAccountMockPromise()
       .then((account) => {
         const mockAccountRequestData = account.originalRequest;
         return mockAccountRequestData;
       })
       .then((mockAccountRequestData) => {
-        console.log(JSON.stringify(mockAccountRequestData, null, 2), 'MOCK ACCOUNT REQUEST DATA');
         return superagent.post(`${apiUrl}/signup`)
           .send(mockAccountRequestData)
-          .then((response) => {
-            console.log(JSON.stringify(response, null, 2), 'SUPERAGENT POST RESPONSE');
-          })
-          .catch((err) => {
-            console.log(JSON.stringify(err, null, 2), 'SUPERAGENT POST ERROR');
-          });
       })
       .then((response) => {
-        console.log(JSON.stringify(response, null, 2), 'RESPONSE');
+        expect(response).toBe('foo');
       })
       .catch((err) => {
-        throw err;
+        expect(err.status).toBe(409);
       });
   });
 });
