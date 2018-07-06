@@ -2,7 +2,7 @@
 
 import 'babel-polyfill';
 import faker from 'faker';
-import { createAccountMockPromise, removeAccountMockPromise } from './account-mock';
+import { createAccountMockPromise } from './account-mock';
 import Movie from '../../model/movie';
 import Account from '../../model/account';
 

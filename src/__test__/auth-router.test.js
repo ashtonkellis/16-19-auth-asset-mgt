@@ -14,7 +14,7 @@ describe('AUTH router', () => {
     done();
   });
 
-  test('GET 200 to api/login for successful login and receipt of a TOKEN', () => {
+  test.only('GET 200 to api/login for successful login and receipt of a TOKEN', () => {
     return createAccountMockPromise()
       .then((mockData) => {
         return superagent.get(`${apiUrl}/login`)
@@ -75,23 +75,28 @@ describe('AUTH router', () => {
   });
 
   test('POST 409 to /api/signup for duplicate value', () => { //eslint-disable-line
-    const mockAccount = {
-      username: 'duplicate',
-      email: 'duplicate@gmail.com',
-      password: 'passwordFor409',
-    };
-    
-    Promise.all([
-      superagent.post(`${apiUrl}/signup`).send(mockAccount),
-      superagent.post(`${apiUrl}/signup`).send(mockAccount),
-    ])
+
+    return createAccountMockPromise()
+      .then((account) => {
+        const mockAccountRequestData = account.originalRequest;
+        return mockAccountRequestData;
+      })
+      .then((mockAccountRequestData) => {
+        console.log(JSON.stringify(mockAccountRequestData, null, 2), 'MOCK ACCOUNT REQUEST DATA');
+        return superagent.post(`${apiUrl}/signup`)
+          .send(mockAccountRequestData)
+          .then((response) => {
+            console.log(JSON.stringify(response, null, 2), 'SUPERAGENT POST RESPONSE');
+          })
+          .catch((err) => {
+            console.log(JSON.stringify(err, null, 2), 'SUPERAGENT POST ERROR');
+          });
+      })
       .then((response) => {
-        console.log(JSON.stringify(response, null, 2), 'THIS IS THE RESPONSE'); // eslint-disable-line
-        throw response;
+        console.log(JSON.stringify(response, null, 2), 'RESPONSE');
       })
       .catch((err) => {
-        console.log(JSON.stringify(err, null, 2), 'THIS IS THE ERROR'); // eslint-disable-line
-        expect(err.status).toBe(409);
+        throw err;
       });
   });
 });
