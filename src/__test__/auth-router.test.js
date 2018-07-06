@@ -82,7 +82,7 @@ describe('AUTH router', () => {
       })
       .then((mockAccountRequestData) => {
         return superagent.post(`${apiUrl}/signup`)
-          .send(mockAccountRequestData)
+          .send(mockAccountRequestData);
       })
       .then((response) => {
         expect(response).toBe('foo');
