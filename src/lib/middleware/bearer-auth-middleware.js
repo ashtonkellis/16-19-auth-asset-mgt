@@ -9,11 +9,11 @@ export default (request, response, next) => {
   if (!request.headers.authorization) return next(new HttpErrors(400, 'BEARER AUTH MIDDLEWARE: no headers auth'));
 
   const token = request.headers.authorization.split('Bearer ')[1];
-  if (!token) return next(new HttpErrors(400, 'BEARER AUTH MIDDLEWARE: no token'));
+  if (!token) return next(new HttpErrors(401, 'BEARER AUTH MIDDLEWARE: no token'));
 
   return jwtVerify(token, process.env.SECRET_KEY)
     .catch((error) => {
-      return Promise.reject(new HttpErrors(400, `BEARER AUTH - jsonWebToken error ${JSON.stringify(error)}`));
+      return Promise.reject(new HttpErrors(401, `BEARER AUTH - jsonWebToken error ${JSON.stringify(error)}`));
     })
     .then((decryptedToken) => {
       return Account.findOne({ tokenSeed: decryptedToken.tokenSeed });

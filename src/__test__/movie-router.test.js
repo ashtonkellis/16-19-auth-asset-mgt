@@ -76,13 +76,29 @@ describe('GET /api/movies', () => {
       });
   });
 
-  test('404 GET for valid request made with an id that was not found', () => {
-    return superagent.get(`${apiUrl}/"5b345f9d1086d2149c26d370"`)
-      .then((response) => {
-        throw response;
-      })
-      .catch((err) => {
-        expect(err.status).toBe(404);
-      });
+  test('404 GET for valid request made with an id that was not found', async () => {
+    try {
+      const savedMovieData = await createMovieMockPromise();
+      const response = await superagent.get(`${apiUrl}/"badId"`)
+        .set('Authorization', `Bearer ${savedMovieData.token}`);
+
+      expect(response).toBe('foo');
+    } catch (err) {
+      expect(err.status).toBe(404);
+    }
+  });
+
+  test('401 GET for a valid request made with an invalid token', async () => {
+    try {
+      const savedMovieData = await createMovieMockPromise();
+      // const { token } = savedMovieData;
+      const token = 'BADTOKEN';
+      const response = await superagent.get(`${apiUrl}/${savedMovieData.movie._id}`)
+        .set('Authorization', `Bearer ${token}`);
+
+      expect(response.status).toBe('foo');
+    } catch (err) {
+      expect(err.status).toBe(401);
+    }
   });
 });

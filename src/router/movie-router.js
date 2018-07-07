@@ -25,7 +25,9 @@ movieRouter.post('/api/movies', bearerAuthMiddleware, (request, response, next) 
   return undefined;
 });
 
-movieRouter.get('/api/movies/:id?', (request, response, next) => {
+movieRouter.get('/api/movies/:id?', bearerAuthMiddleware, (request, response, next) => {
+  if (!request.account) return next(new HttpErrors(401, 'MOVIE ROUTER POST ERROR: not authorized'));
+
   Movie.init()
     .then(() => {
       return Movie.findOne({ _id: request.params.id });
@@ -35,6 +37,8 @@ movieRouter.get('/api/movies/:id?', (request, response, next) => {
       response.json(foundMovie);
     })
     .catch(next);
+  
+  return undefined;
 });
 
 export default movieRouter;
