@@ -56,13 +56,13 @@ describe('TESTING ROUTER PROFILE', () => {
     });
   });
 
-  test('POST 400 for trying to post a profile with a bad token', async () => {
+  test('POST 401 for trying to post a profile with a bad token', async () => {
     try {
       const response = await superagent.post(`${apiUrl}/profiles`)
         .set('Authorization', 'Bearer BADTOKEN');
       expect(response).toEqual('foo');
     } catch (err) {
-      expect(err.status).toEqual(400);
+      expect(err.status).toEqual(401);
     }
   });
 });

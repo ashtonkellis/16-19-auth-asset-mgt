@@ -13,7 +13,7 @@ const createAccountMockPromise = () => {
     .then((account) => {
       mockData.originalRequest = originalRequest;
       mockData.account = account;
-      return account.createTokenPromise(); // this line changes the token seed
+      return account.createTokenPromise();
     })
     .then((token) => {
       mockData.token = token;

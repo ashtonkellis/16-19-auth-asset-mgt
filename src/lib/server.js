@@ -12,6 +12,7 @@ import loggerMiddleware from './middleware/logger-middleware';
 // our routes
 import authRouter from '../router/auth-router';
 import profileRouter from '../router/profile-router';
+import movieRouter from '../router/movie-router';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,6 +28,7 @@ app.use(express.json());
 app.use(loggerMiddleware);
 app.use(authRouter);
 app.use(profileRouter);
+app.use(movieRouter);
 // catch all
 app.all('*', (request, response) => {
   console.log('Returning a 404 from the catch/all route'); // eslint-disable-line

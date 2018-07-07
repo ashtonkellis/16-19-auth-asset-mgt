@@ -66,7 +66,11 @@ Account.create = (username, email, password) => {
       }).save();
     })
     .catch((err) => {
-      throw new HttpErrors(500, `ERROR WITH HASHING or ERR WITH SAVING ACCOUNT: ${JSON.stringify(err)}`);
+      if (err.message.toLowerCase().includes('duplicate key')) {
+        throw err;
+      } else {
+        throw new HttpErrors(501, `ERROR WITH HASHING or ERR WITH SAVING ACCOUNT: ${JSON.stringify(err)}`);
+      }
     });
 };
 
