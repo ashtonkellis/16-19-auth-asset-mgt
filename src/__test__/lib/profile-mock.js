@@ -1,6 +1,6 @@
 import faker from 'faker';
 import Profile from '../../model/profile';
-import { createAccountMockPromise, removeAccountMockPromise } from './account-mock';
+import createAccountMockPromise from './account-mock';
 
 const createProfileMockPromise = () => {
   const mockData = {};
@@ -28,11 +28,4 @@ const createProfileMockPromise = () => {
     });
 };
 
-const removeAllResources = () => {
-  return Promise.all([
-    Profile.remove({}),
-    removeAccountMockPromise(),
-  ]);
-};
-
-export { createProfileMockPromise, removeAllResources };
+export default createProfileMockPromise;

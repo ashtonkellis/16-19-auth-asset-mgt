@@ -25,6 +25,4 @@ const createAccountMockPromise = () => {
     });
 };
 
-const removeAccountMockPromise = () => Account.remove({});
-
-export { createAccountMockPromise, removeAccountMockPromise };
+export default createAccountMockPromise;

@@ -57,3 +57,32 @@ PUT api/moviess?id={Movie_id}
 // example endpoint to delete movies # 123
 api/movies?id=123
 ```
+
+## Resource: Movis
+Movies have the following fields:
+```
+Movie {
+  _id: a unique id that is created on instantiation
+  name: string (required)
+  director: string (optional)
+}
+```
+
+## API Endpoints
+GET api/images?id={Movie_id}
+```
+// example endpoint to get images # 123
+api/images?id=123
+```
+
+DELETE api/images?id={Movie_id}
+```
+// example endpoint to delete images # 123
+api/images?id=123
+```
+
+PUT api/imagess?id={Movie_id}
+```
+// example endpoint to delete images # 123
+api/movies?id=123
+```

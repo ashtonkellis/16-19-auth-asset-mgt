@@ -3,23 +3,16 @@
 import superagent from 'superagent';
 import faker from 'faker';
 import { startServer, stopServer } from '../lib/server';
-import Movie from '../model/movie';
-import Account from '../model/account';
-import Profile from '../model/profile';
 import createMovieMockPromise from './lib/movie-mock';
-import { createAccountMockPromise } from './lib/account-mock';
+import createAccountMockPromise from './lib/account-mock';
+import removeAllDocuments from './lib/remove-all-documents';
 
 const apiUrl = `http://localhost:${process.env.PORT}/api/movies`;
 
 beforeAll(startServer);
 afterAll(stopServer);
-afterEach((done) => {
-  Promise.all([
-    Account.remove({}),
-    Movie.remove({}),
-    Profile.remove({}),
-  ]);
-  done();
+afterEach(async () => {
+  await removeAllDocuments();
 });
 
 describe('POST /api/movies', () => {

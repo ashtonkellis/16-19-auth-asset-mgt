@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import faker from 'faker';
-import { createAccountMockPromise } from './account-mock';
+import createAccountMockPromise from './account-mock';
 import Image from '../../model/image';
 
 const createImageMockPromise = async () => {
