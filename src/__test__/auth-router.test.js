@@ -2,7 +2,7 @@ import superagent from 'superagent';
 import faker from 'faker';
 
 import { startServer, stopServer } from '../lib/server';
-import { createAccountMockPromise } from './lib/account-mock';
+import createAccountMockPromise from './lib/account-mock';
 import removeAllDocuments from './lib/remove-all-documents';
 
 const apiUrl = `http://localhost:${process.env.PORT}/api`;

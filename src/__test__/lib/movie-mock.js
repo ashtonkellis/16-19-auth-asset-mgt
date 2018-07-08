@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import faker from 'faker';
-import { createAccountMockPromise } from './account-mock';
+import createAccountMockPromise from './account-mock';
 import Movie from '../../model/movie';
 
 const createMovieMockPromise = async () => {
