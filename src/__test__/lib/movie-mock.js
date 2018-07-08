@@ -1,5 +1,3 @@
-'use strict';
-
 import 'babel-polyfill';
 import faker from 'faker';
 import { createAccountMockPromise } from './account-mock';

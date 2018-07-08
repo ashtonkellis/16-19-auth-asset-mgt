@@ -3,10 +3,7 @@
 import superagent from 'superagent';
 import { startServer, stopServer } from '../lib/server';
 import createImageMockPromise from './lib/image-mock';
-import Account from '../model/account';
-import Image from '../model/image';
-import Movie from '../model/movie';
-import Profile from '../model/profile';
+import removeAllDocuments from './lib/remove-all-documents';
 
 const poopImg = `${__dirname}/assets/poop.png`;
 const apiUrl = `http://localhost:${process.env.PORT}/api/images`;
@@ -30,12 +27,7 @@ describe('TESTING ROUTES AT /api/images', () => {
     return undefined;
   });
   afterEach(async () => {
-    await Promise.all([
-      Account.remove(),
-      Image.remove(),
-      Profile.remove(),
-      Movie.remove(),
-    ]);
+    await removeAllDocuments();
   });
 
   describe('POST ROUTES TO /api/images', () => {

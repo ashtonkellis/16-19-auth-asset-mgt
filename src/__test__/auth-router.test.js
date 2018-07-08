@@ -2,16 +2,16 @@ import superagent from 'superagent';
 import faker from 'faker';
 
 import { startServer, stopServer } from '../lib/server';
-import { createAccountMockPromise, removeAccountMockPromise } from './lib/account-mock';
+import { createAccountMockPromise } from './lib/account-mock';
+import removeAllDocuments from './lib/remove-all-documents';
 
 const apiUrl = `http://localhost:${process.env.PORT}/api`;
 
 describe('AUTH router', () => {
   beforeAll(startServer);
   afterAll(stopServer);
-  beforeEach((done) => {
-    removeAccountMockPromise();
-    done();
+  afterEach(async () => {
+    await removeAllDocuments();
   });
 
   test('GET 200 to api/login for successful login and receipt of a TOKEN', () => {

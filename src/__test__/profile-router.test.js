@@ -2,7 +2,7 @@ import superagent from 'superagent';
 import faker from 'faker';
 import { startServer, stopServer } from '../lib/server';
 import { createAccountMockPromise } from './lib/account-mock';
-import { removeAllResources } from './lib/profile-mock';
+import removeAllDocuments from './lib/remove-all-documents';
 
 const apiUrl = `http://localhost:${process.env.PORT}/api`;
 
@@ -20,8 +20,6 @@ describe('TESTING ROUTER PROFILE', () => {
   });
 
   beforeEach(async () => {
-    await removeAllResources();
-
     try {
       mockData = await createAccountMockPromise();
       account = mockData.account; // eslint-disable-line
@@ -30,6 +28,10 @@ describe('TESTING ROUTER PROFILE', () => {
       return console.log(err, 'ERROR FROM PROFILE ROUTER TEST: before each'); // eslint-disable-line
     }
     return undefined;
+  });
+
+  afterEach(async () => {
+    await removeAllDocuments();
   });
 
   describe('POST PROFILE ROUTES TESTING', async () => {
