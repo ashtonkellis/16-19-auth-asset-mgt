@@ -4,7 +4,7 @@ process.env.MONGODB_URI = 'mongodb://localhost/testing';
 
 process.env.SECRET_KEY = 'SuperSecret';
 
-const isAwsMock = false;
+const isAwsMock = true;
 
 if (isAwsMock) {
   process.env.AWS_BUCKET = 'fake';
