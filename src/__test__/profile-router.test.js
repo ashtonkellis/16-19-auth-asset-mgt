@@ -27,7 +27,7 @@ describe('TESTING ROUTER PROFILE', () => {
       account = mockData.account; // eslint-disable-line
       token = mockData.token; // eslint-disable-line
     } catch (err) {
-      return console.log(err); // eslint-disable-line
+      return console.log(err, 'ERROR FROM PROFILE ROUTER TEST: before each'); // eslint-disable-line
     }
     return undefined;
   });
