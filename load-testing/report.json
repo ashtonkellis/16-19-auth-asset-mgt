@@ -1,0 +1,92 @@
+{
+  "aggregate": {
+    "timestamp": "2018-07-08T23:14:02.262Z",
+    "scenariosCreated": 1,
+    "scenariosCompleted": 0,
+    "requestsCompleted": 1,
+    "latency": {
+      "min": 419.5,
+      "max": 419.5,
+      "median": 419.5,
+      "p95": 419.5,
+      "p99": 419.5
+    },
+    "rps": {
+      "count": 1,
+      "mean": 2.08
+    },
+    "scenarioDuration": {
+      "min": null,
+      "max": null,
+      "median": null,
+      "p95": null,
+      "p99": null
+    },
+    "scenarioCounts": {
+      "Create Users": 1
+    },
+    "errors": {},
+    "codes": {
+      "404": 1
+    },
+    "matches": 0,
+    "customStats": {},
+    "counters": {},
+    "phases": [
+      {
+        "duration": 1,
+        "arrivalRate": 1
+      },
+      {
+        "duration": 0,
+        "arrivalRate": 0
+      }
+    ]
+  },
+  "intermediate": [
+    {
+      "timestamp": "2018-07-08T23:14:02.261Z",
+      "scenariosCreated": 1,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 1,
+      "latency": {
+        "min": 419.5,
+        "max": 419.5,
+        "median": 419.5,
+        "p95": 419.5,
+        "p99": 419.5
+      },
+      "rps": {
+        "count": 1,
+        "mean": 2.08
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {
+        "Create Users": 1
+      },
+      "errors": {},
+      "codes": {
+        "404": 1
+      },
+      "matches": 0,
+      "latencies": [
+        [
+          1531091642203,
+          "78c45cca-13a8-4d28-a68a-2b8488fa60ec",
+          419510427,
+          404
+        ]
+      ],
+      "customStats": {},
+      "counters": {},
+      "concurrency": 0,
+      "pendingRequests": 0
+    }
+  ]
+}
