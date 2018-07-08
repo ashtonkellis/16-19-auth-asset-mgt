@@ -8,12 +8,12 @@
     },
     "phases": [
       {
-       "duration": 1,
-       "arrivalRate": 1
+       "duration": 10,
+       "arrivalRate": 10
       },
       {
-        "duration": 0,
-        "arrivalRate": 0
+        "duration": 10,
+        "arrivalRate": 100
       }
     ],
     "processor" : "./load-test-create-user.js"
