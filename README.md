@@ -90,6 +90,10 @@ api/movies?id=123
 ## Load Testing Analysis
 All testing performed on the deployed heroku app, using the free tier option. 
 
+Latency is the defined as the delay incurred in communicating ta message. Its helpful to think of it as "time on the wire".
+
+Response time is the total time that it takes between when a user submits a request and when they receive a response. It includes the latency plus the processing time.
+
 RPS: The depolyed app was tested using 1000 responses per second
 Latency:
 - Min: 99.6 ms (the minimum latency observed was 0.096 seconds)
