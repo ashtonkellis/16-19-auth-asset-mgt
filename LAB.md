@@ -1,12 +1,14 @@
-## Submission Instructions
-* Continue from previous authorization labs.
-* Submit on canvas: 
-  * an observation: i noticed that out process.env.SECRET_KEY is visible in our test.env.js once we push to GitHub? Is this on purpose, or should we be taking steps to hide this piece of info?
-  * your original time estimate: 5 hours (12:30 start time)
-  * how long you spent: 7 hours, but i took a short nap in there.
-  * a link to your pull request: 
-  * a link to your deployed Heroku URL: https://ashton-lab16-19.herokuapp.com/
-  * an attached screenshot that shows you succesfully uploaded a Multer hash-named file to your AWS S3 bucket: https://raw.githubusercontent.com/ashtonkellis/16-19-auth-asset-mgt/master/src/__test__/assets/proof.png
+Explain terms such as RPS, latency, and percentiles to your reader, and describe what the numbers mean in terms of the performance of your app. Explain the differences between latency and response time. Explain the type of scenarios you used (in the case of this lab's MVP, only a POST request to `/api/signup` is all you have to address). 
 
-## Documentation
-Same as previous labs with documentations on updated routes. 
+While not required, **try to include the charts that Artillery generates to aid in visualization of your written analysis**. 
+
+## Stretch Goals
+Explore the Artillery docs linked above to add more complex configurations and Javascript code to your tests. Try to figure out how to test your additional routes, and include those additional test results in your analysis. 
+
+## Submission Instructions
+* Continue from previous authorization labs in a new branch `lab-19`.
+* Submit on canvas: 
+  * an observation: 
+  * your original time estimate: 5 hours (3pm start time)
+  * how long you spent: 
+  * a link to your pull request: 

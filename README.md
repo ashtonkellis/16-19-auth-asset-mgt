@@ -86,3 +86,14 @@ PUT api/imagess?id={Movie_id}
 // example endpoint to delete images # 123
 api/movies?id=123
 ```
+
+## Load Testing Analysis
+All testing performed on the deployed heroku app, using the free tier option. 
+
+RPS: The depolyed app was tested using 1000 responses per second
+Latency:
+- Min: 99.6 ms (the minimum latency observed was 0.096 seconds)
+- Max: 9876.8 ms (the maximum latency observeed was 9.8 seconds)
+- Median: 2503.4 ms (the median latency observed was 2.5 seconds)
+- 95th percentile: 8990.9 ms (95% of the users expect to experience a latency of less than 9 seconds)
+- 99th percentile: 9437.1 ms (99% of the users expect to experience a latency of less than 9.5 seconds)
